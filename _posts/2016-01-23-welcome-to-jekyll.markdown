@@ -21,21 +21,21 @@ SSL/TLS协议主要基于公钥加密，与对称密钥加密相比，优点在�
 ![Alt text](https://i-technet.sec.s-msft.com/dynimg/IC196340.gif "流程示意")
 
 1. （Client）在TCP连接建立之后，客户端向服务端发送ClientHello请求。请求当中将会根据协议的规定携带以下信息：
-> - 版本号（Version Number）. 客户端最高支持的协议版本。
->	* 2--SSL 2.0
->	* 3--SSL 3.0
->	* 3.1--TLS
->	* 1.1--TLS 1.1
->	* 1.2--TLS 1.2
-> - 随机数（Randomly Generated Data）. 32字节，其中4个字节包含客户端的日期和时间，剩下28个字节生成的随机数最终会用来生成 master secret 。	
-> - 加密方式（Cipher Suite）. 客户端支持的加密方法列表。比如：TLS_RSA_WITH_DES_CBC_SHA，其中TLS为协议的版本，RSA是密钥交换时使用的算法，DES_CBC是加密算法，SHA是哈希函数。
-> - 压缩算法（Compression Algorithm）。要求使用的压缩算法，目前还不支持。
+ - 版本号（Version Number）. 客户端最高支持的协议版本。
+        * 2--SSL 2.0
+        * 3--SSL 3.0
+        * 3.1--TLS
+        * 1.1--TLS 1.1
+        * 1.2--TLS 1.2
+ - 随机数（Randomly Generated Data）. 32字节，其中4个字节包含客户端的日期和时间，剩下28个字节生成的随机数最终会用来生成 master secret 。	
+ - 加密方式（Cipher Suite）. 客户端支持的加密方法列表。比如：TLS_RSA_WITH_DES_CBC_SHA，其中TLS为协议的版本，RSA是密钥交换时使用的算法，DES_CBC是加密算法，SHA是哈希函数。
+ - 压缩算法（Compression Algorithm）。要求使用的压缩算法，目前还不支持。
 
 2. （Server）接下来，服务端返回Server Hello响应。包含：
-> - 版本号（Version Number），确认使用的协议版本。
-> - 随机数（Randomly Generated Data）. 32字节，其中4个字节包含客户端的日期和时间，剩下28个字节生成的随机数最终会用来生成 master secret 。
-> - 加密方式（Cipher Suite）. 服务器选择合适的加密方式。如果没有，握手阶段失败。
-> - 压缩算法（Compression Algorithm）。选择使用的压缩算法，目前还不支持。
+ - 版本号（Version Number），确认使用的协议版本。
+ - 随机数（Randomly Generated Data）. 32字节，其中4个字节包含客户端的日期和时间，剩下28个字节生成的随机数最终会用来生成 master secret 。
+ - 加密方式（Cipher Suite）. 服务器选择合适的加密方式。如果没有，握手阶段失败。
+ - 压缩算法（Compression Algorithm）。选择使用的压缩算法，目前还不支持。
 
 3. （Server）Server Certificate，服务器将它的证书发送给客户端。在证书中包含了包含了服务器的公钥，客户端将会用这个公钥验证服务端的合法性并且会使用这个公钥来加密premaster secret。
 与此同时，客户端会验证证书的合法性。比如证书的签发机构（Certificate Authorities,CA）确保正在访问的域名，跟证书提供的一致。
