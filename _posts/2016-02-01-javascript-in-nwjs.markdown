@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "node-webkit中的JavaScript"
+title:  "Node-webkit中的JavaScript"
 date:   2016-02-01 16:24:18
 categories: tech
 ---
@@ -52,7 +52,28 @@ try {
 }
 {% endhighlight %}
 
-###3.2 事件
+###3.2 Window
+nwjs中的window对象是对DOM原生的window对象的拓展。通过window对象，可以对窗口的一些行为，属性进行控制。可以通过
+
+{% highlight javascript %}
+var gui = require('nw.gui')
+var win = gui.Window.get()
+{% endhighlight %}
+获得当前窗口的window对象(ps:因为一个应用中可能存在多个窗口)。
+获得window对象之后，就可以对其进行一系列操作
+
+{% highlight javascript %}
+// 监听窗口的最小化事件
+win.on('minimize', function() {
+  console.log('Window is minimized');
+});
+
+// 将窗口最小化
+win.minimize();
+{% endhighlight %}
+更多的操作可以到[这里](https://github.com/nwjs/nw.js/wiki/window)查看
+
+###3.3 事件
 
 在nwjs中，每个UI元素都继承了nodejs的[EventEmitter](https://nodejs.org/api/events.html#events_class_eventemitter)，所以可以很方便地给DOM元素绑定事件，自定义事件。
 
@@ -62,7 +83,7 @@ div.on('click', function() {
 })
 {% endhighlight %}
 
-###3.3 本地文件
+###3.4 本地文件
 出于安全考虑。在浏览器的web页面当中是不能对用户的本地文件进行相关的操作的。但是作为客户端，有时候对本地文件的访问和操作的需求还是存在的。所以在nwjs中，可以获取file类型的input的真实路径。
 
 {% highlight javascript %}
