@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "从promise到async"
-date:   2016-02-27 16:40:00
+date:   2016-02-26 16:40:18
 categories: tech
 ---
 
