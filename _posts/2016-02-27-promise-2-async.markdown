@@ -39,7 +39,6 @@ async function doAsyncThing () {
 ### 链式操作
 promise最为吸引人的一个方面就是可以通过链式操作来避免回调嵌套。看看用promise来进行一系列异步操作的代码：
 
-
 {% highlight javascript %}
 function doAsyncThing () {
     return asyncOperation1().then(function(val) {
